@@ -1,14 +1,17 @@
 DIST_NAME = TODO-PACKAGE-NAME
 
 SCRIPT_FILES = \
-	src/$(DIST_NAME).ts
+	src/index.ts
 
 all: build lint test coverage esdoc
 
-build: dist/$(DIST_NAME).js
+build: dist/parsegraph-$(DIST_NAME).js
 .PHONY: build
 
-demo: dist/$(DIST_NAME).js
+build-prod: dist-prod/parsegraph-$(DIST_NAME).js
+.PHONY: build-prod
+
+demo: dist/parsegraph-$(DIST_NAME).js
 	npm run demo
 .PHONY: demo
 
@@ -38,10 +41,40 @@ esdoc:
 doc: esdoc
 .PHONY: doc
 
-dist/$(DIST_NAME).js: package.json package-lock.json $(SCRIPT_FILES)
+tar: parsegraph-$(DIST_NAME)-dev.tgz
+.PHONY: tar
+
+tar-prod: parsegraph-$(DIST_NAME)-prod.tgz
+.PHONY: tar
+
+parsegraph-$(DIST_NAME)-prod.tgz: dist-prod/parsegraph-$(DIST_NAME).js
+	rm -rf parsegraph-$(DIST_NAME)
+	mkdir parsegraph-$(DIST_NAME)
+	cp -r README.md LICENSE parsegraph-$(DIST_NAME)
+	cp -r dist-prod/ parsegraph-$(DIST_NAME)/dist
+	cp -r package-prod.json parsegraph-$(DIST_NAME)/package.json
+	tar cvzf $@ parsegraph-$(DIST_NAME)/
+	rm -rf parsegraph-$(DIST_NAME)
+
+parsegraph-$(DIST_NAME)-dev.tgz: dist/parsegraph-$(DIST_NAME).js
+	rm -rf parsegraph-$(DIST_NAME)
+	mkdir parsegraph-$(DIST_NAME)
+	cp -r -t parsegraph-$(DIST_NAME) package.json package-lock.json README.md demo/ LICENSE dist/
+	tar cvzf $@ parsegraph-$(DIST_NAME)/
+	rm -rf parsegraph-$(DIST_NAME)
+
+dist/parsegraph-$(DIST_NAME).js: package.json package-lock.json $(SCRIPT_FILES) $(GLSL_SCRIPTS)
 	npm run build
-	mv -v dist/src/* dist/
+	mv -v dist-types/src/* dist/
+	mv dist/index.d.ts dist/parsegraph-$(DIST_NAME).d.ts
+	mv dist/index.d.ts.map dist/parsegraph-$(DIST_NAME).d.ts.map
+
+dist-prod/parsegraph-$(DIST_NAME).js: package.json package-lock.json $(SCRIPT_FILES)
+	npm run build-prod
+	mv -v dist-types/src/* dist-prod/
+	mv dist-prod/index.d.ts dist-prod/parsegraph-$(DIST_NAME).d.ts
+	mv dist-prod/index.d.ts.map dist-prod/parsegraph-$(DIST_NAME).d.ts.map
 
 clean:
-	rm -rf dist .nyc_output
+	rm -rf dist dist-types dist-prod .nyc_output parsegraph-$(DIST_NAME) parsegraph-$(DIST_NAME)-dev.tgz parsegraph-$(DIST_NAME)-prod.tgz
 .PHONY: clean

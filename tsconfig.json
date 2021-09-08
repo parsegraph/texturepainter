@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./dist-types/",
     "noImplicitAny": true,
     "module": "es6",
     "target": "es5",
