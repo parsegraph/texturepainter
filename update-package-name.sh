@@ -14,7 +14,6 @@ fi
 echo package name is $PACKAGE_NAME
 
 sed -i "s/microproject/$PACKAGE_NAME/g" .git/config
-git mv src/index.ts src/$PACKAGE_NAME.ts
 git ls-files | xargs sed -i "s/TODO-PACKAGE-NAME/$PACKAGE_NAME/g"
 git rm -f $0
 git add .
