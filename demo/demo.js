@@ -2,7 +2,28 @@ const glob = require("glob")
 
 const express = require("express");
 const app = express();
-const port = 3000;
+
+const getPort = (port)=>{
+  if (process.env.SITE_PORT) {
+    try {
+      port = parseInt(process.env.SITE_PORT);
+    } catch(ex) {
+      // Suppress exception
+      console.log("Exception parsing SITE_PORT: ", ex);
+    }
+  }
+  const args = process.argv.slice(2);
+  if (args.length > 0) {
+    try {
+      port = parseInt(args[0]);
+    } catch(ex) {
+      // Suppress exception
+      console.log("Exception parsing site port from first argument: ", ex);
+    }
+  }
+  return port;
+};
+const port = getPort(3000);
 
 async function getDemos() {
   return new Promise((respond, reject)=>{
