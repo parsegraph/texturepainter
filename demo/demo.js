@@ -53,7 +53,7 @@ app.get('/', async (req, res) => {
   write(`</head>`);
   write(`<body>`);
   write(`<h1>TODO-PACKAGE-NAME <a href='/coverage'>Coverage</a> <a href='/docs'>Docs</a></h1>`);
-  write(`<p>This library is available as JavaScript UMD module: <a href='/TODO-PACKAGE-NAME.js'>TODO-PACKAGE-NAME.js</a></p>`);
+  write(`<p>This library is available as JavaScript UMD module: <a href='/parsegraph-TODO-PACKAGE-NAME.js'>parsegraph-TODO-PACKAGE-NAME.js</a></p>`);
   write(`<h2>Samples &amp; Demos</h2>`);
   write(`<ul>`);
   (await getDemos()).forEach((demo)=>{
