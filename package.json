@@ -71,7 +71,6 @@
     "parsegraph-compileprogram": "^2.1.1",
     "parsegraph-matrix": "^1.4.7",
     "parsegraph-pagingbuffer": "^1.5.1",
-    "parsegraph-window": "^1.7.4",
     "prettier": "2.1.2",
     "raw-loader": "^4.0.1",
     "source-map-loader": "^1.0.2",
