@@ -1,6 +1,6 @@
 {
   "name": "parsegraph-texturepainter",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "node",
   "main": "dist/parsegraph-texturepainter.js",
   "types": "dist/parsegraph-texturepainter.d.ts",
