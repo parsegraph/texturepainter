@@ -1,14 +1,15 @@
 import { assert } from "chai";
-import GraphicsWindow from "parsegraph-window";
 import TexturePainter from "../dist/parsegraph-texturepainter";
 import {matrixIdentity3x3} from 'parsegraph-matrix';
 
 import { mockDOM } from "node-canvas-webgl";
+import {BasicGLProvider} from "parsegraph-compileprogram";
+import Color from "parsegraph-color";
 mockDOM(window);
 
 describe("Package", function () {
   it("works", () => {
-    const win = new GraphicsWindow();
+    const win = new BasicGLProvider("Provider", new Color(1, 1, 1, 1));
     const gl = win.gl();
     const texture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, texture);
