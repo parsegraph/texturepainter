@@ -1,4 +1,4 @@
-var assert = require("assert");
+import {assert} from "chai";
 import todo from "../dist/parsegraph-TODO-PACKAGE-NAME";
 
 describe("Package", function () {
