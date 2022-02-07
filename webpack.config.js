@@ -14,7 +14,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "parsegraph-texturepainter.js",
     globalObject: "this",
-    library: "parsegraph",
+    library: "parsegraph_texturepainter",
     libraryTarget: "umd",
   },
   module: {
