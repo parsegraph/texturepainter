@@ -1,40 +1,35 @@
 import { compileProgram, GLProvider } from "parsegraph-compileprogram";
 import PagingBuffer from "parsegraph-pagingbuffer";
-import Color from "parsegraph-color";
 import { Matrix3x3 } from "parsegraph-matrix";
 
 import texturePainterVertexShader from "./TexturePainter_VertexShader.glsl";
 import texturePainterFragmentShader from "./TexturePainter_FragmentShader.glsl";
 
 export default class TexturePainter {
-  _gl;
+  _gl: WebGLRenderingContext;
   _textureProgram: WebGLProgram;
   _texture: WebGLTexture;
   _texWidth: number;
   _texHeight: number;
   _buffer: PagingBuffer;
   aPosition: number;
-  aColor: number;
-  aBackgroundColor: number;
   aTexCoord: number;
   aAlpha: number;
   uWorld: WebGLUniformLocation;
   uTexture: WebGLUniformLocation;
-  _color: Color;
-  _backgroundColor: Color;
   _alpha: number;
 
   constructor(
-    window: GLProvider,
+    glProvider: GLProvider,
     textureId: WebGLTexture,
     texWidth: number,
     texHeight: number
   ) {
-    this._gl = window.gl();
+    this._gl = glProvider.gl();
 
     // Compile the shader program.
     this._textureProgram = compileProgram(
-      window,
+      glProvider,
       "TexturePainter",
       texturePainterVertexShader,
       texturePainterFragmentShader
@@ -45,9 +40,8 @@ export default class TexturePainter {
 
     // Prepare attribute buffers.
     this._buffer = new PagingBuffer(this._gl, this._textureProgram);
+
     this.aPosition = this._buffer.defineAttrib("a_position", 2);
-    this.aColor = this._buffer.defineAttrib("a_color", 4);
-    this.aBackgroundColor = this._buffer.defineAttrib("a_backgroundColor", 4);
     this.aTexCoord = this._buffer.defineAttrib("a_texCoord", 2);
     this.aAlpha = this._buffer.defineAttrib("a_alpha", 1);
 
@@ -57,9 +51,6 @@ export default class TexturePainter {
       this._textureProgram,
       "u_texture"
     );
-
-    this._color = new Color(1, 1, 1, 1);
-    this._backgroundColor = new Color(0, 0, 0, 0);
 
     this._buffer.addPage();
     this._alpha = 1;
