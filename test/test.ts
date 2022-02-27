@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import TexturePainter from "../dist/parsegraph-texturepainter";
+import TexturePainter from "../src/index";
 import { matrixIdentity3x3 } from "parsegraph-matrix";
 
 import { mockDOM } from "node-canvas-webgl";
