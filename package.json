@@ -2,8 +2,8 @@
   "name": "parsegraph-texturepainter",
   "version": "1.6.2",
   "description": "texturepainter",
-  "main": "dist/parsegraph-texturepainter.js",
-  "types": "dist/texturepainter.d.ts",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "coverage": "nyc npm run test",
     "test": "cross-env TS_NODE_PROJECT=\"tsconfig.testing.json\" mocha",
