@@ -2,10 +2,8 @@ import { assert } from "chai";
 import TexturePainter from "../src/index";
 import { matrixIdentity3x3 } from "parsegraph-matrix";
 
-import { mockDOM } from "node-canvas-webgl";
 import { BasicGLProvider } from "parsegraph-compileprogram";
 import Color from "parsegraph-color";
-mockDOM(window);
 
 describe("Package", function () {
   it("works", () => {
