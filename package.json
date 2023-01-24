@@ -1,6 +1,6 @@
 {
   "name": "parsegraph-texturepainter",
-  "version": "1.6.16",
+  "version": "1.6.17",
   "description": "texturepainter",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
